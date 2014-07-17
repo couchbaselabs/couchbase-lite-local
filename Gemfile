@@ -1,6 +1,4 @@
 source "https://rubygems.org"
 
-
-gem "rake"
-
-gem "faraday", group: :test
+# Specify your gem's dependencies in deprecator.gemspec
+gemspec

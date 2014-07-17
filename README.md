@@ -19,8 +19,18 @@ This little jRuby tool is heavily inspired by
 which does the same thing on android and iOS, but it runs locally on your Mac
 (or Pi)
 
-## Install and use
+## Install and run
 
+### Prebuild jar
+Download the latest jar from [the
+releases](https://github.com/couchbaselabs/couchbase-lite-local/releases) unpack
+and run via
+
+```
+$ java -jar couchbase_lite_local.jar
+```
+
+### Source
 clone the git repository and install the dependencies
 
 ```
@@ -31,8 +41,24 @@ $ bundle install
 and run the contained script
 
 ```
-$ bin/cbl-local
+$ ./bin/cbl-local
 ```
 
 make sure you are using [JRuby](http://jruby.org/)
+
+## Build
+The jar for this bundles everything needed so it can be run standalone, to do
+this it uses [warbler](https://github.com/jruby/warbler). To build the jar run
+
+```
+$ bundle exec rake jar
+```
+
+## Todos
+- add option to point to an existing cblite data folder
+- add the option to pass a sync url to actually sync with a remote
+- advertise cblite via bonjour so it can be discovered more easily for local
+  syncing
+- add comand line option to set port
+
 
