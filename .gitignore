@@ -10,6 +10,9 @@
 /tmp/
 /data/
 
+## dont include the build jar
+couchbase_lite_local.jar
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history
