@@ -54,11 +54,4 @@ this it uses [warbler](https://github.com/jruby/warbler). To build the jar run
 $ bundle exec rake jar
 ```
 
-## Todos
-- add option to point to an existing cblite data folder
-- add the option to pass a sync url to actually sync with a remote
-- advertise cblite via bonjour so it can be discovered more easily for local
-  syncing
-- add comand line option to set port
-
 
