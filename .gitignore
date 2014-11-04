@@ -12,6 +12,8 @@
 
 ## dont include the build jar
 couchbase_lite_local.jar
+couchbase-lite-local.jar
+
 
 ## Specific to RubyMotion:
 .dat*
