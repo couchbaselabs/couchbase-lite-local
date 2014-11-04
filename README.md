@@ -21,6 +21,16 @@ which does the same thing on android and iOS, but it runs locally on your Mac
 
 ## Install and run
 
+### Supported
+
+Currently this has been tested on and supplies the neccessary native binaries
+for
+
+- Raspbian with a Raspberry Pi using the linux\_arm version in the vendor folder
+- MacOS using the macos version in the vendor folder
+- Ubuntu using the linux\_x86\_64 version in the vendor folder
+
+
 ### Prebuild jar
 Download the latest jar from [the
 releases](https://github.com/couchbaselabs/couchbase-lite-local/releases) unpack

@@ -11,6 +11,8 @@ Dir["#{root}/vendor/*.jar"].each { |jar|
 # load native jars for platform
 if RbConfig::CONFIG["target_cpu"] =~ /x86/ && RbConfig::CONFIG["host_os"] =~ /darwin/
   require "#{root}/vendor/macosx/couchbase-lite-java-native.jar"
+elsif RbConfig::CONFIG["target_cpu"] =~ /x86_64/ && RbConfig::CONFIG["host_os"] =~ /linux/
+  require "#{root}/vendor/linux_x86_64/couchbase-lite-java-native.jar"
 elsif RbConfig::CONFIG["target_cpu"] =~ /arm/
   require "#{root}/vendor/linux_arm/couchbase-lite-java-native.jar"
 else
