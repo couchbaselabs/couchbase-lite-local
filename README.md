@@ -37,7 +37,7 @@ releases](https://github.com/couchbaselabs/couchbase-lite-local/releases) unpack
 and run via
 
 ```
-$ java -jar couchbase_lite_local.jar
+$ java -jar couchbase-lite-local.jar
 ```
 
 ### Source
