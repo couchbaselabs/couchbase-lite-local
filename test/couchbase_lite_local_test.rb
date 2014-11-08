@@ -26,5 +26,4 @@ describe CouchbaseLiteLocal do
     # either the database is already created or we just created it, both good!
     [201, 412].must_include output["status"]
   end
-
 end
