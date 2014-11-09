@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    couchbase_lite_local (0.0.3-java)
+    couchbase_lite_local (0.0.4-java)
 
 GEM
   remote: https://rubygems.org/
