@@ -33,6 +33,7 @@ java_import com.couchbase.lite.View
 java_import com.couchbase.lite.javascript.JavaScriptViewCompiler
 java_import com.couchbase.lite.Manager
 java_import com.couchbase.lite.JavaContext
+java_import com.couchbase.lite.util.Log
 
 
 module CouchbaseLiteLocal
@@ -44,12 +45,11 @@ module CouchbaseLiteLocal
   class HTTPListener
 
     def initialize port
-      @context = JavaContext.new
       @credentials = Credentials.new
       URLStreamHandlerFactory.registerSelfIgnoreError
       View.setCompiler JavaScriptViewCompiler.new
-      server = start_cblite_server @context
-      @port = start_cblite_listener port, server, @credentials
+      server = start_cblite
+      @port = start_cblite_listener(port, server, @credentials)
     end
 
     def stop
@@ -69,13 +69,21 @@ module CouchbaseLiteLocal
     end
 
     private
-    def start_cblite_server context
-      Manager.new context, Manager::DEFAULT_OPTIONS
+    def start_cblite
+      begin
+        # get the actual database
+        Manager.new JavaContext.new, Manager::DEFAULT_OPTIONS
+      rescue IOException => e
+        raise "Failed to open databse #{e}"
+      end
     end
 
     def start_cblite_listener port, server, credentials
       listener = LiteListener.new server, port, credentials
       @thread = Thread.new { listener.run }
+
+      # return the actual port where the listener runs on, this might differ from
+      # the port passed if it is in use.
       listener.getListenPort
     end
 
