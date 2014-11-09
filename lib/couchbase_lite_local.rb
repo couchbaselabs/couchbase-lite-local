@@ -38,14 +38,18 @@ java_import com.couchbase.lite.util.Log
 
 module CouchbaseLiteLocal
   DEFAULT_PORT = 5984
-  def self.start port = DEFAULT_PORT
-    HTTPListener.new port
+  def self.start port = DEFAULT_PORT, login = nil, password = nil
+    HTTPListener.new port, login, password
   end
 
   class HTTPListener
+    def initialize port, login, password
+      if login.nil? || password.nil?
+        @credentials = Credentials.new
+      else
+        @credentials = Credentials.new(login, password)
+      end
 
-    def initialize port
-      @credentials = Credentials.new
       URLStreamHandlerFactory.registerSelfIgnoreError
       View.setCompiler JavaScriptViewCompiler.new
       server = start_cblite
