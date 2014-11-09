@@ -3,9 +3,35 @@
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'couchbase_lite_local'
+require "couchbase_lite_local"
+require "optparse"
 
-couchbase_lite_local = CouchbaseLiteLocal.start
+options = {}
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: couchbase-lite-local [options]"
+  opts.on("--help", "-h", "Display help") {
+    puts opts
+    exit
+  }
+  opts.on("--port PORT", "-p", "Port to run CouchbaseLite on") { |port|
+    options[:port] = port.to_i
+  }
+  opts.on("--login LOGIN", "-l", "Username for CouchbaseLite, requires Password to be set") { |login|
+    options[:login] = login
+  }
+  opts.on("--password PASSWORD", "-P", "Password for CouchbaseLite, requires login to be set") { |password|
+    options[:password] = password
+  }
+end
+optparse.parse!
+
+if (options[:login] && !options[:password]) || (!options[:login] && options[:password])
+  puts optparse.help
+  exit 1
+end
+options[:port] ||= 5984
+
+couchbase_lite_local = CouchbaseLiteLocal.start(options[:port], options[:login], options[:password])
 
 puts <<-EOF
   Running local couchbase lite instance
